@@ -13,7 +13,12 @@ list= page.css("div div table")[1].css("tbody tr")[1..-1]
 driver_list = driver_page.css("div.devsite-article-body h3") 
 modelinfo = {}
 driverinfo = {}
-list.map{|x| modelinfo[x.css("td")[0].content] = x.css("td")[1..-1].map{|y| y.content}}
+list.map{|x| 
+  td = x.css("td")[0]
+  if td != nil
+    modelinfo[x.css("td")[0].content ] = x.css("td")[1..-1].map{|y| y.content}
+  end
+  } 
 case cmd 
 when "show"
    query = ARGV[1]
